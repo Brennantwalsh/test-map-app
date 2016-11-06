@@ -1,0 +1,9 @@
+    <div class="transparent">
+      <h1 class="Header">Tiles View</h1>
+    </div>
+    <br>
+    <% @tiles.each do |tile| %>
+    <div class="col-xs-3">
+      <%= image_tag "#{tile.path}.png", {class: "map-tiles" } %> 
+    </div>
+    <% end %>

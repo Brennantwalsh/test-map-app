@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Master's Maps</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <% if  current_user%>
+          <a class="navbar-brand" href= "/users/<%= current_user.id %>"> Master's Maps</a>  
+        <% else %>
+          <a class="navbar-brand" href="/login">Master's Maps</a>  
+        <% end %>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li><%= link_to 'Log Out', '/logout', method: :delete %></li>
+          <% else %>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+          <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tiles<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/tiles">All Tiles</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/tiles?sort=hall">Hallway Tiles</a></li>
+              <li><a href="/tiles?sort=room">Room Tiles</a></li>
+              <li><a href="/tiles?sort=full">Full Tiles</a></li>
+              <li><a href="/tiles?sort=curve">Curved Tiles</a></li>
+              <li><a href="/tiles?sort=straight">Straight Tiles</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div class = 'container'>
+  <% flash.each do |name, message| %>
+  <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= message %>
+  </div>
+  <% end %>
+    <%= yield %>
+  </body>
+</html>

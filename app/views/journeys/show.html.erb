@@ -1,0 +1,57 @@
+<div class="transparent">
+    <br>
+    <h1 class="Header">Journey: <%= @journey.name %></h1>
+    <h3 class="description">Description:<%= @journey.description %></h3>
+    <h3 class="journey">Creator: <%= @journey.user.username %></h3>
+    <h3 class="journey">Players:</h3>
+    <ul class="journey">
+      <% @journey.participated_users.each do |player| %>
+        <li><%= player.username %></li>
+      <% end %>
+    </ul>
+    <h3 class="journey">Maps:</h3>
+    <ul class="journey">
+      <% @journey.maps.each do |map| %>
+        <li><%= link_to map.name, "/maps/#{map.id}", method: :get, class: "btn btn-info"  %></li>
+        <br>
+      <% end %>
+    </ul>
+    <br>
+    <% if @journey.dm_id == current_user.id %>
+        <h1 class="Header">Add a new Map</h1>
+        <div class="journey"> 
+        <%= form_tag '/maps', method: :post do %>
+          <%= label_tag :name %>
+          <%= text_field_tag :name %>
+          <%= label_tag :description %>
+          <%= text_field_tag :description %>
+          <br>
+          <%= label_tag :row_number %>
+          <%= select_tag(:row_number, options_for_select([3, 4, 6]))%>
+          <%= label_tag :column_number %>
+          <%= select_tag(:column_number, options_for_select([3, 4, 6]))%>
+          <%= hidden_field_tag :journey_id, @journey.id %>
+          <%= submit_tag "Dry the ink", class: "btn btn-info" %>
+        </div>
+        <% end %>
+        <h3 class="journey">Add People to the Journey:</h3>
+        <div class="journey">
+        <%= form_tag "/participations", method: :post do %>
+          <h4><%= label_tag :username %></h4>
+          <h4><%= text_field_tag :username %></h4>
+          <%= hidden_field_tag :journey_id, @journey.id %>
+          <%= submit_tag "Join the Crew", class: "btn btn-info" %>
+        <% end %>
+        </div>
+    <% end %>
+    <br>
+    <div class="journey">
+      <%= link_to "Edit Journey", "/journeys/#{@journey.id}/edit", method: :get, class: "btn btn-info" %>
+    </div> 
+    <br>
+    <div class="journey">
+      <%= link_to "End Journey", "/journeys/#{@journey.id}", method: :delete, class: "btn btn-danger" %>
+    </div>
+    <br> 
+</div>
+<br>

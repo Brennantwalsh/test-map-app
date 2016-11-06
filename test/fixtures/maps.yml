@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  row_number: 1
+  column_number: 1
+  creator_id: 1
+
+two:
+  name: MyString
+  description: MyString
+  row_number: 1
+  column_number: 1
+  creator_id: 1

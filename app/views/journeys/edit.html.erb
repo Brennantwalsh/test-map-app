@@ -1,0 +1,16 @@
+<div class="transparent">
+  <br>
+  <h1 class="Header"> Update Quest Info:</h1>
+  <div class="journey">
+    
+  <%= form_tag "/journeys/#{@journey.id}", method: :patch do%>
+  <%= label_tag :name%>
+  <%= text_field_tag :name, @journey.name %>
+  <br>
+  <%= label_tag :description%>
+  <%= text_field_tag :description, @journey.description %>
+  <br>
+  <%= submit_tag "Right. That's what it was", class: "btn btn-info" %>
+  <% end %>
+  </div>
+</div>

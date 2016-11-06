@@ -1,0 +1,77 @@
+body{
+  background-image: url('/images/map.jpg');
+  font-family: Papyrus,fantasy;
+}
+
+div.transparent{
+  background: rgba(251, 205, 154, 0.5);
+  border-width: 10px
+  border-color: black;
+  border-style: solid;
+  border-radius: 25px;
+  
+}
+
+
+#map-builder > div.fatty{
+  float: left;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#map-builder {
+  border-radius: 25px;
+  overflow: hidden;
+}
+svg {
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+#reveal {
+      position: absolute;
+      z-index: 500;
+      width: 90%;
+      height: 1140px;
+    }
+    
+#hobbit {
+      position: absolute;
+      z-index: 500;
+      width: 90%;
+      height: 1140px;
+    }
+
+
+.btn-info {
+  color: #000;
+}
+
+.alert-success {
+  background-color: #9d8277;
+  border-color: #000;
+  color: #000;
+}
+
+.tiles{
+  height: 200px;
+  width: 200px;
+}
+.map-tiles{
+  height: auto;
+  width: 100%;
+}
+h1.Header {
+  text-align: center;
+  font-weight: bolder;
+}
+h3.description{
+  text-align: center;
+}
+ul {
+  list-style-type: none;
+}
+.journey {
+  text-align: center;
+}

@@ -1,0 +1,27 @@
+<div class="transparent">
+  <div class="journey">
+  
+    <h1>Sign Up to Begin Your Journey</h1>
+
+    <%= form_tag '/users', method: :post do  %>
+      <div>
+        <%= label_tag :username %>
+        <%= text_field_tag :username %>
+      </div>
+      <div>
+        <%= label_tag :email %>
+        <%= text_field_tag :email %>
+      </div>
+      <div>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+      </div>
+      <div>
+        <%= label_tag :password_confirmation %>
+        <%= password_field_tag :password_confirmation %>
+      </div>
+
+      <%= submit_tag "Begin Your Quest!", class: "btn btn-info"%>
+    <% end %>
+  </div>  
+</div>

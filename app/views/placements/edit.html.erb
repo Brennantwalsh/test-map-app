@@ -1,0 +1,10 @@
+
+<h2>Edit Tile</h2>
+<%= image_tag "#{@placement.tile.path}.png" %>
+<%= form_tag  "/placements/#{@placement.id}", method: :patch do %>
+  <%= hidden_field_tag :map_id, @placement.map_id %>
+  <%= text_field_tag :tile_id, @placement.tile_id %>
+  <%= hidden_field_tag :row, @placement.row %>
+  <%= hidden_field_tag :column, @placement.column %>
+  <%= submit_tag "Change Tile" %>
+<% end %>

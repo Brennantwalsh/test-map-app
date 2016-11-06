@@ -1,0 +1,81 @@
+<div class="transparent">
+  <span><h1 class="Header"><%= @map.name %></h1></span>
+  <h3 class= "description"><%=@map.description %></h3>
+  <h4>Journey: <%= link_to @map.journey.name, "/journeys/#{@map.journey_id}", method: :get, class: "btn btn-info"   %></h4>
+  <% if current_user.id == @map.creator_id %>
+    <h4>Edit Map: <%= link_to "Edit", "/maps/#{@map.id}/edit", method: :get, class: "btn btn-info" %></h4>
+  <% end %>
+</div>
+<br>
+<% if current_user.id != @map.creator_id  %>
+  <% if @map.row_number == 6 %>
+    <% circle = 0.15 %>
+  <% else %>
+    <% circle = 0.2 %>
+  <% end %>
+  <svg id="reveal" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <radialGradient id="radialGradient" cx=".10" cy=".10" r=<%= circle %>>
+        <stop offset="0%" stop-color="alpha" stop-opacity="0"/>
+        <stop offset="100%" stop-color="white" stop-opacity="1"/>
+      </radialGradient>
+
+      <mask id="radialMask" maskUnits="objectBoundingBox" x="0" y="0" width="1.0" height="1.0">
+        <rect x="0" y="0" height="100%" width="100%" fill="url(#radialGradient)"/>
+      </mask>
+
+      <rect x="0" y="0" height="100%" width="100%" fill="rgba(0,0,0,1)" mask="url(#radialMask)"/>
+    </svg>
+    <canvas id="hobbit" draggable="true"> 
+    </canvas>
+<% end %>
+<div id="map-builder">  
+    <% @placements.each do |placement| %>
+      <%= render partial: "tiles", locals: {placement: placement} %>
+    <% end %>
+</div>
+
+<br>
+<br>
+<br>
+<br> 
+<br>  
+
+<div class="transparent">
+<h2 class="journey"> User:<%= current_user.username %> </h2>
+</div>
+<% if @map.user.id == current_user.id %>
+  <%= link_to "Delete Map", "/maps/#{@map.id}", method: :delete, class: "btn btn-danger" %>
+  <br>
+
+<div ng-app="app">
+  <div ng-controller="mapsController" ng-init="setup()">
+
+  <button ng-click="showTiles()" class="btn btn-info">All Tiles</button>
+
+  <datalist id="tiles">
+      <option ng-repeat="tile in tiles">{{ tile.path }}</option> 
+  </datalist> 
+
+  <div class="transparent">
+    <h4 class="journey">Search Tile by Name:</h4>
+    <input type="text" ng-model="tileFilter" list="tiles">
+    <h4 class="journey">Limit Return:</h4>
+    <input type="text" ng-model="limitToThis" id="number">
+  </div>
+    <div ng-if="showBar">
+      <div class="col-md-2" ng-repeat="tile in tiles | filter: { path: tileFilter } | limitTo: limitToThis" ondragover="allowDrop(event)">
+        <img src="/images/{{ tile.path }}.png" draggable="true" class="tiles" id="{{tile.id}}" ondragstart="drag(event)" ondrop="drop(event)">
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<br>
+<br>
+<br>
+<% if @map.user.id != current_user.id %>
+  <script>
+    mover();
+    hello();
+  </script>
+<% end %>

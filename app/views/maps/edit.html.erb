@@ -1,0 +1,19 @@
+<div class="transparent">
+  
+<h1 class="Header">Tell me what you saw.</h1>
+
+  <%= form_tag "/maps/#{@map.id}", method: :patch do %>
+    <div class="journey">
+    <%= label_tag :name %>
+    <%= text_field_tag :name, @map.name %>
+    </div>
+    <div class="journey">
+    <%= label_tag :description %>
+    <%= text_field_tag :description, @map.description %>
+    </div>
+    <div class="journey">
+      <%= submit_tag "Redo map", class: "btn btn-info" %>
+    </div>
+    <br>
+  <% end %>
+</div>

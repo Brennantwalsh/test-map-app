@@ -1,0 +1,9 @@
+  <% if @map.user.id == current_user.id %>  
+  <% columns = 12/@map.column_number.to_i %>  
+   <div class="fatty col-xs-<%= columns  %>" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="false"> <%= image_tag "#{placement.tile.path}.png", {class: "map-tiles", id: "#{placement.id}", draggable: false}%></div>
+  <% elsif current_user.id == @participations.user_id%>
+  <% columns = 12/@map.column_number.to_i %>  
+   <div class="fatty col-xs-<%= columns  %>">
+     <%= image_tag "#{placement.tile.path}.png", {class: "map-tiles" } %> 
+   </div>
+  <% end %>
